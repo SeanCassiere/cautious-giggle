@@ -1,11 +1,10 @@
 import * as pathe from "pathe";
-import { installPhoton } from "@photonjs/core/vite";
 import type { Plugin } from "vite";
 
 const virtualClientEntry = "virtual:framework-app:entry-client";
 const virtualServerEntry = "virtual:framework-app:entry-server";
 
-function myFrameworkPlugin(): Plugin {
+export function myFrameworkPlugin(): Plugin {
 	let root = process.cwd();
 
 	return {
@@ -73,18 +72,3 @@ function myFrameworkPlugin(): Plugin {
 		},
 	};
 }
-
-function photonPlugin(): Array<Plugin> {
-	return installPhoton("framework-app", {
-		fullInstall: true,
-		resolveMiddlewares() {
-			return "@repo/framework-app/universal-middleware";
-		},
-	});
-}
-
-function frameworkPlugin(): Array<Plugin> {
-	return [myFrameworkPlugin(), ...photonPlugin()];
-}
-
-export { frameworkPlugin };

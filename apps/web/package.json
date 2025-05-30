@@ -1,5 +1,5 @@
 {
-	"name": "web",
+	"name": "@repo/web",
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
@@ -11,7 +11,7 @@
 	},
 	"dependencies": {
 		"@photonjs/core": "0.0.1-commit-2aa7ff2",
-		"@repo/framework-app": "workspace:*",
+		"@repo/framework-lib": "workspace:*",
 		"@repo/ui": "workspace:*",
 		"@universal-middleware/core": "^0.4.7",
 		"hono": "^4.7.10",
