@@ -8,7 +8,7 @@ export function myFrameworkPlugin(): Plugin {
 	let root = process.cwd();
 
 	return {
-		name: "@repo/framework-lib",
+		name: "repo-framework-lib",
 		sharedDuringBuild: true,
 		config() {
 			return {
