@@ -1,8 +1,14 @@
 import { startTransition } from "react";
 import { hydrateRoot } from "react-dom/client";
 import App from "./app";
+import { Router } from "wouter";
 
 startTransition(() => {
 	console.info("[app] Starting hydration process...");
-	hydrateRoot(document, <App />);
+	hydrateRoot(
+		document,
+		<Router>
+			<App />
+		</Router>
+	);
 });

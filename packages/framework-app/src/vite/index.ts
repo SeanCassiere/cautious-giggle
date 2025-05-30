@@ -2,8 +2,8 @@ import * as pathe from "pathe";
 import { installPhoton } from "@photonjs/core/vite";
 import type { Plugin } from "vite";
 
-const virtualAppClient = "virtual:framework-app:entry-client.tsx";
-const virtualAppExport = "virtual:framework-app:app.tsx";
+const virtualClientEntry = "virtual:framework-app:entry-client";
+const virtualServerEntry = "virtual:framework-app:entry-server";
 
 function myFrameworkPlugin(): Plugin {
 	let root = process.cwd();
@@ -40,7 +40,7 @@ function myFrameworkPlugin(): Plugin {
 					build: {
 						rollupOptions: {
 							input: {
-								index: virtualAppClient,
+								index: virtualClientEntry,
 							},
 						},
 						outDir: "./dist/client",
@@ -51,11 +51,11 @@ function myFrameworkPlugin(): Plugin {
 			return undefined;
 		},
 		resolveId(id) {
-			if (id === virtualAppExport) {
-				return pathe.join(root, "src", "app.tsx");
+			if (id === virtualServerEntry) {
+				return pathe.join(root, "src", "entry-server.tsx");
 			}
 
-			if (id === virtualAppClient) {
+			if (id === virtualClientEntry) {
 				return pathe.join(root, "src", "entry-client.tsx");
 			}
 

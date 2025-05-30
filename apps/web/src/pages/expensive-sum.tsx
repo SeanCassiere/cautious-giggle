@@ -1,6 +1,8 @@
 await new Promise((resolve) => setTimeout(resolve, 10_000)); // Simulate a delay for demonstration purposes
 
-const ExpensiveSum = ({ n }: { n: number }) => {
+const n = 1e6;
+
+const ExpensiveSum = () => {
 	const calculateSum = (num: number) => {
 		let total = 0;
 		for (let i = 1; i <= num; i++) {

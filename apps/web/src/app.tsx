@@ -1,36 +1,39 @@
 import React from "react";
 import "./style.css";
-import typescriptLogo from "/typescript.svg";
+import { Link, Route, useLocation } from "wouter";
 
-const ExpensiveSum = React.lazy(() => import("./expensive-sum"));
+const HomePage = React.lazy(() => import("./pages/home"));
+const ExpensiveSum = React.lazy(() => import("./pages/expensive-sum"));
+
+function withSuspense(Component: React.ComponentType) {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	return function SuspendedComponent(props: any) {
+		const [location] = useLocation();
+
+		return (
+			<React.Suspense fallback={<div>Loading for {location}...</div>}>
+				<Component {...props} />
+			</React.Suspense>
+		);
+	};
+}
 
 export default function App() {
-	const [count, setCount] = React.useState(0);
-
 	return (
 		<RootDocument>
-			<a href='https://vitejs.dev' target='_blank'>
-				<img src='/vite.svg' className='logo' alt='Vite logo' />
-			</a>
-			<a href='https://www.typescriptlang.org/' target='_blank'>
-				<img
-					src={typescriptLogo}
-					className='logo vanilla'
-					alt='TypeScript logo'
-				/>
-			</a>
-			<header id='header'>
-				<h1>Web</h1>
-			</header>
+			<nav>
+				<ul>
+					<li>
+						<Link to='/'>Home</Link>
+					</li>
+					<li>
+						<Link to='/expensive-sum'>Expensive Sum</Link>
+					</li>
+				</ul>
+			</nav>
 
-			<div className='card'>
-				<button id='counter' type='button' onClick={() => setCount(count + 1)}>
-					{count}
-				</button>
-			</div>
-			<React.Suspense fallback={<div>loading...</div>}>
-				<ExpensiveSum n={10000000 + count} />
-			</React.Suspense>
+			<Route path='/expensive-sum' component={withSuspense(ExpensiveSum)} />
+			<Route path='/' component={withSuspense(HomePage)} />
 		</RootDocument>
 	);
 }

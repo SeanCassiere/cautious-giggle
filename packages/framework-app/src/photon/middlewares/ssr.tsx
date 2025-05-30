@@ -13,18 +13,25 @@ export const ssrMiddleware = enhance(
 	async (request: Request) => {
 		console.info("[app] SSR Middleware invoked for request:", request.url);
 
+		const url = new URL(request.url);
+		const pathname = url.href.replace(url.origin, "");
+
 		// @ts-expect-error some
-		const App = await import("virtual:framework-app:app.tsx")
+		const App = await import("virtual:framework-app:entry-server")
 			.then((mod) => mod.default)
 			.catch((error) => {
 				console.error("[app] Error loading App component:", error);
 				throw new Error("Failed to load App component");
 			});
 
-		const stream = await renderToReadableStream(<App />, {
-			// bootstrapScriptContent: HMR_CODE,
-			bootstrapModules: ["/src/entry-client.tsx"],
-		});
+		const ssrContext = {};
+
+		const stream = await renderToReadableStream(
+			<App pathname={pathname} ssrContext={ssrContext} />,
+			{
+				bootstrapModules: ["/src/entry-client.tsx"],
+			}
+		);
 
 		return new Response(stream, {
 			headers: { "content-type": "text/html" },

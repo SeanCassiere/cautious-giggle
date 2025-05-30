@@ -16,7 +16,8 @@
 		"@universal-middleware/core": "^0.4.7",
 		"hono": "^4.7.10",
 		"react": "^19.1.0",
-		"react-dom": "^19.1.0"
+		"react-dom": "^19.1.0",
+		"wouter": "^3.7.1"
 	},
 	"devDependencies": {
 		"@repo/eslint-config": "workspace:*",
