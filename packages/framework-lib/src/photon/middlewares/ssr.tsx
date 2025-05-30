@@ -17,7 +17,7 @@ export const ssrMiddleware = enhance(
 		const pathname = url.href.replace(url.origin, "");
 
 		// @ts-expect-error server-side entry point
-		const App = await import("virtual:framework-app:entry-server")
+		const App = await import("virtual:framework-lib:entry-server")
 			.then((mod) => mod.default)
 			.catch((error) => {
 				console.error("[app] Error loading App component:", error);

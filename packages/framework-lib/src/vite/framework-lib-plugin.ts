@@ -1,14 +1,14 @@
 import * as pathe from "pathe";
 import type { Plugin } from "vite";
 
-const virtualClientEntry = "virtual:framework-app:entry-client";
-const virtualServerEntry = "virtual:framework-app:entry-server";
+const virtualClientEntry = "virtual:framework-lib:entry-client";
+const virtualServerEntry = "virtual:framework-lib:entry-server";
 
 export function myFrameworkPlugin(): Plugin {
 	let root = process.cwd();
 
 	return {
-		name: "@repo/framework-app",
+		name: "@repo/framework-lib",
 		sharedDuringBuild: true,
 		config() {
 			return {

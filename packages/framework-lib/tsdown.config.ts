@@ -9,5 +9,5 @@ export default defineConfig({
 	],
 	dts: true,
 	format: ["esm"],
-	external: ["virtual:framework-app:entry-server"],
+	external: ["virtual:framework-lib:entry-server"],
 });
