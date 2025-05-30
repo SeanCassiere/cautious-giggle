@@ -5,7 +5,7 @@ import { Hono } from "hono";
 import { poweredBy } from "hono/powered-by";
 import { logger } from "hono/logger";
 
-async function startServer() {
+function startServer() {
 	const app = new Hono();
 
 	console.info("[app] Starting hono server...");
@@ -22,4 +22,4 @@ async function startServer() {
 	return serve(app);
 }
 
-export default await startServer();
+export default startServer();
