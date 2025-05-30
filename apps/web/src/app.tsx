@@ -1,7 +1,8 @@
 import React from "react";
 import "./style.css";
 import typescriptLogo from "/typescript.svg";
-import ExpensiveSum from "./expensive-sum";
+
+const ExpensiveSum = React.lazy(() => import("./expensive-sum"));
 
 export default function App() {
 	const [count, setCount] = React.useState(0);

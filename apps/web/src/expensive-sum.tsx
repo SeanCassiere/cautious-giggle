@@ -1,3 +1,5 @@
+await new Promise((resolve) => setTimeout(resolve, 10_000)); // Simulate a delay for demonstration purposes
+
 const ExpensiveSum = ({ n }: { n: number }) => {
 	const calculateSum = (num: number) => {
 		let total = 0;
