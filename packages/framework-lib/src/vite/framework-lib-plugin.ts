@@ -23,7 +23,6 @@ export function myFrameworkPlugin(): Plugin {
 		},
 		configResolved(config) {
 			root = config.root;
-			console.log(`Framework app plugin initialized with root: ${root}`);
 		},
 		configEnvironment(name) {
 			if (name === "client") {
