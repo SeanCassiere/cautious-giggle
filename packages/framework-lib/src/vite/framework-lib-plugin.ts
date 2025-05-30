@@ -26,22 +26,6 @@ export function myFrameworkPlugin(): Plugin {
 			console.log(`Framework app plugin initialized with root: ${root}`);
 		},
 		configEnvironment(name) {
-			if (name === "ssr") {
-				return {
-					build: {
-						outDir: "./dist/server",
-						emptyOutDir: false,
-						rollupOptions: {
-							input: {
-								index: virtualServerEntry,
-							},
-						},
-						manifest: true,
-						ssrManifest: true,
-					},
-				};
-			}
-
 			if (name === "client") {
 				return {
 					build: {
@@ -53,6 +37,15 @@ export function myFrameworkPlugin(): Plugin {
 						outDir: "./dist/client",
 						manifest: true,
 						ssrManifest: true,
+					},
+				};
+			}
+
+			if (name === "ssr") {
+				return {
+					build: {
+						outDir: "./dist/server",
+						emptyOutDir: false,
 					},
 				};
 			}
