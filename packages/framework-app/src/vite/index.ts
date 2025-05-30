@@ -31,6 +31,12 @@ function myFrameworkPlugin(): Plugin {
 					build: {
 						outDir: "./dist/server",
 						emptyOutDir: false,
+						rollupOptions: {
+							input: {
+								index: virtualServerEntry,
+							},
+						},
+						ssrManifest: true,
 					},
 				};
 			}
@@ -44,6 +50,7 @@ function myFrameworkPlugin(): Plugin {
 							},
 						},
 						outDir: "./dist/client",
+						manifest: true,
 					},
 				};
 			}
