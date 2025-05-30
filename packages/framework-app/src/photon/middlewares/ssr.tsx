@@ -16,7 +16,7 @@ export const ssrMiddleware = enhance(
 		const url = new URL(request.url);
 		const pathname = url.href.replace(url.origin, "");
 
-		// @ts-expect-error some
+		// @ts-expect-error server-side entry point
 		const App = await import("virtual:framework-app:entry-server")
 			.then((mod) => mod.default)
 			.catch((error) => {

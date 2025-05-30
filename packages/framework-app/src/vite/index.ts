@@ -51,12 +51,12 @@ function myFrameworkPlugin(): Plugin {
 			return undefined;
 		},
 		resolveId(id) {
-			if (id === virtualServerEntry) {
-				return pathe.join(root, "src", "entry-server.tsx");
-			}
-
 			if (id === virtualClientEntry) {
 				return pathe.join(root, "src", "entry-client.tsx");
+			}
+
+			if (id === virtualServerEntry) {
+				return pathe.join(root, "src", "entry-server.tsx");
 			}
 
 			return undefined;
