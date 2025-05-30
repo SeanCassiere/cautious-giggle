@@ -1,6 +1,9 @@
-await new Promise((resolve) => setTimeout(resolve, 10_000)); // Simulate a delay for demonstration purposes
+const n = 100e6;
 
-const n = 1e6;
+function numberFormat(num: number): string {
+	const formatter = new Intl.NumberFormat("en-US", {});
+	return formatter.format(num);
+}
 
 const ExpensiveSum = () => {
 	const calculateSum = (num: number) => {
@@ -16,8 +19,8 @@ const ExpensiveSum = () => {
 
 	return (
 		<div>
-			<h1>Sum of the first {n} natural numbers:</h1>
-			<p>{result}</p>
+			<h1>Sum of the first {numberFormat(n)} natural numbers:</h1>
+			<p>{numberFormat(result)}</p>
 		</div>
 	);
 };
