@@ -1,0 +1,44 @@
+{
+	"name": "@repo/framework-app",
+	"version": "0.0.0",
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts",
+		"./vite": "./src/vite/index.ts",
+		"./universal-middleware": {
+			"development": {
+				"import": "./src/photon/entries/dev.ts",
+				"default": "./src/photon/entries/dev.ts"
+			},
+			"import": "./src/photon/entries/prod.ts",
+			"default": "./src/photon/entries/prod.ts"
+		},
+		"./package.json": "./package.json"
+	},
+	"license": "MIT",
+	"scripts": {
+		"lint": "eslint \"**/*.ts\""
+	},
+	"dependencies": {
+		"@photonjs/core": "0.0.1-commit-2aa7ff2",
+		"@types/node": "^22.15.21",
+		"@universal-middleware/core": "^0.4.7",
+		"@universal-middleware/sirv": "^0.1.20",
+		"pathe": "^2.0.3",
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0"
+	},
+	"devDependencies": {
+		"@repo/eslint-config": "workspace:*",
+		"@repo/typescript-config": "workspace:*",
+		"@types/react": "^19.0.1",
+		"@types/react-dom": "^19.0.2",
+		"eslint": "^8.57.0",
+		"typescript": "5.5.4",
+		"vite": "^6.3.5"
+	},
+	"peerDependencies": {
+		"react": "^19.1.0",
+		"react-dom": "^19.1.0"
+	}
+}
