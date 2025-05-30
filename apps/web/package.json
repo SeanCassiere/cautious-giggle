@@ -10,16 +10,14 @@
 		"lint": "eslint \"src/**/*.ts\""
 	},
 	"dependencies": {
-		"@photonjs/core": "0.0.1-commit-2aa7ff2",
 		"@repo/framework-lib": "workspace:*",
-		"@repo/ui": "workspace:*",
-		"@universal-middleware/core": "^0.4.7",
 		"hono": "^4.7.10",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
 		"wouter": "^3.7.1"
 	},
 	"devDependencies": {
+		"@photonjs/core": "0.0.1-commit-2aa7ff2",
 		"@repo/eslint-config": "workspace:*",
 		"@repo/typescript-config": "workspace:*",
 		"@types/react": "^19.1.5",
