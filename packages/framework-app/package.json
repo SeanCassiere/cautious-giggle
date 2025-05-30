@@ -3,20 +3,24 @@
 	"version": "0.0.0",
 	"type": "module",
 	"exports": {
-		".": "./src/index.ts",
-		"./vite": "./src/vite/index.ts",
+		".": "./dist/index.js",
+		"./vite": "./dist/vite/index.js",
 		"./universal-middleware": {
 			"development": {
-				"import": "./src/photon/entries/dev.ts",
-				"default": "./src/photon/entries/dev.ts"
+				"types": "./dist/photon/entries/dev.d.ts",
+				"import": "./dist/photon/entries/dev.js",
+				"default": "./dist/photon/entries/dev.js"
 			},
-			"import": "./src/photon/entries/prod.ts",
-			"default": "./src/photon/entries/prod.ts"
+			"types": "./dist/photon/entries/prod.d.ts",
+			"import": "./dist/photon/entries/prod.js",
+			"default": "./dist/photon/entries/prod.js"
 		},
 		"./package.json": "./package.json"
 	},
 	"license": "MIT",
 	"scripts": {
+		"build": "tsdown",
+		"build:lib": "tsdown",
 		"lint": "eslint \"**/*.ts\""
 	},
 	"dependencies": {
@@ -34,6 +38,7 @@
 		"@types/react": "^19.0.1",
 		"@types/react-dom": "^19.0.2",
 		"eslint": "^8.57.0",
+		"tsdown": "^0.12.4",
 		"typescript": "5.5.4",
 		"vite": "^6.3.5"
 	},
