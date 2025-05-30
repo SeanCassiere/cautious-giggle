@@ -36,6 +36,7 @@ function myFrameworkPlugin(): Plugin {
 								index: virtualServerEntry,
 							},
 						},
+						manifest: true,
 						ssrManifest: true,
 					},
 				};
@@ -51,6 +52,7 @@ function myFrameworkPlugin(): Plugin {
 						},
 						outDir: "./dist/client",
 						manifest: true,
+						ssrManifest: true,
 					},
 				};
 			}
