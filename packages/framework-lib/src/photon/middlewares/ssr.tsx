@@ -11,7 +11,7 @@ import { renderToReadableStream } from "react-dom/server.edge";
 
 export const ssrMiddleware = enhance(
 	async (request: Request) => {
-		console.info("[app] SSR Middleware invoked for request:", request.url);
+		console.info("[lib] SSR Middleware invoked for request:", request.url);
 
 		const url = new URL(request.url);
 		const pathname = url.href.replace(url.origin, "");
@@ -20,7 +20,7 @@ export const ssrMiddleware = enhance(
 		const App = await import("virtual:framework-lib:entry-server")
 			.then((mod) => mod.default)
 			.catch((error) => {
-				console.error("[app] Error loading App component:", error);
+				console.error("[lib] Error loading App component:", error);
 				throw new Error("Failed to load App component");
 			});
 

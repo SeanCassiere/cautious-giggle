@@ -6,6 +6,8 @@ import { Hono } from "hono";
 async function startServer() {
 	const app = new Hono();
 
+	console.info("[app] Starting server...");
+
 	apply(
 		app,
 		// Adds the framework's middlewares
