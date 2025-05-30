@@ -7,5 +7,10 @@ export function photonPlugin(): Array<Plugin> {
 		resolveMiddlewares() {
 			return "@repo/framework-lib/universal-middleware";
 		},
+		server: {
+			id: "./server.ts",
+			type: "server",
+			server: "hono",
+		},
 	});
 }

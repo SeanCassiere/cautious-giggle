@@ -5,8 +5,9 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite --port 3000",
-		"build": "tsc && vite build",
-		"preview": "vite preview",
+		"typecheck": "tsc --noEmit",
+		"build": "vite build",
+		"preview": "pnpm run build",
 		"lint": "eslint \"src/**/*.ts\""
 	},
 	"dependencies": {
