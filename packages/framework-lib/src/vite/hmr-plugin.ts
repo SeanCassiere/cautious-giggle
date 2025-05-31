@@ -119,16 +119,39 @@ export function hmrPlugin(): Array<Plugin> {
 		},
 		{
 			name: "repo-framework-lib:hmr-updates",
-			async handleHotUpdate(ctx) {
-				console.log("handleHotUpdate() ctx\n", ctx);
+			async handleHotUpdate({ server, modules, file, read }) {
+				console.debug("handleHotUpdate() modules\n", modules);
+				console.debug("handleHotUpdate() file\n", file);
 
-				ctx.server.hot.send({
+				const hmrEvent = { route: null };
+
+				server.hot.send({
 					type: "custom",
-					event: "react-router:hmr",
-					data: {},
+					event: "repo-framework-lib:hmr",
+					data: hmrEvent,
 				});
 
-				return ctx.modules;
+				return modules;
+			},
+		},
+		{
+			name: "repo-framework-lib:server-to-trigger-client-hmr",
+			hotUpdate({ server, modules }) {
+				if (this.environment.name !== "ssr" && modules.length === 0) {
+					return;
+				}
+
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
+				const clientModules: Array<any> = []; //
+				//  let clientModules = uniqueNodes(
+				//   modules.flatMap((mod) =>
+				//     getParentClientNodes(server.environments.client.moduleGraph, mod)
+				//   )
+				// );
+
+				for (const clientModule of clientModules) {
+					server.environments.client.reloadModule(clientModule);
+				}
 			},
 		},
 	];

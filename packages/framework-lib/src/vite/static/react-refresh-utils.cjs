@@ -12,70 +12,70 @@ function debounce(fn, delay) {
 /* eslint-disable no-undef */
 const enqueueUpdate = debounce(async () => {
 	let manifest;
-	if (routeUpdates.size > 0) {
-		manifest = JSON.parse(JSON.stringify(__reactRouterManifest));
+	// if (routeUpdates.size > 0) {
+	// 	manifest = JSON.parse(JSON.stringify(__reactRouterManifest));
 
-		for (let route of routeUpdates.values()) {
-			manifest.routes[route.id] = route;
-			let imported = window.__reactRouterRouteModuleUpdates.get(route.id);
-			if (!imported) {
-				throw Error(
-					`[vite-custom:hmr] No module update found for route ${route.id}`
-				);
-			}
-			let routeModule = {
-				...imported,
-				// react-refresh takes care of updating these in-place,
-				// if we don't preserve existing values we'll loose state.
-				default: imported.default
-					? (window.__reactRouterRouteModules[route.id]?.default ??
-						imported.default)
-					: imported.default,
-				ErrorBoundary: imported.ErrorBoundary
-					? (window.__reactRouterRouteModules[route.id]?.ErrorBoundary ??
-						imported.ErrorBoundary)
-					: imported.ErrorBoundary,
-				HydrateFallback: imported.HydrateFallback
-					? (window.__reactRouterRouteModules[route.id]?.HydrateFallback ??
-						imported.HydrateFallback)
-					: imported.HydrateFallback,
-			};
-			window.__reactRouterRouteModules[route.id] = routeModule;
-		}
+	// 	for (let route of routeUpdates.values()) {
+	// 		manifest.routes[route.id] = route;
+	// 		let imported = window.__reactRouterRouteModuleUpdates.get(route.id);
+	// 		if (!imported) {
+	// 			throw Error(
+	// 				`[repo-framework-lib:hmr] No module update found for route ${route.id}`
+	// 			);
+	// 		}
+	// 		let routeModule = {
+	// 			...imported,
+	// 			// react-refresh takes care of updating these in-place,
+	// 			// if we don't preserve existing values we'll loose state.
+	// 			default: imported.default
+	// 				? (window.__reactRouterRouteModules[route.id]?.default ??
+	// 					imported.default)
+	// 				: imported.default,
+	// 			ErrorBoundary: imported.ErrorBoundary
+	// 				? (window.__reactRouterRouteModules[route.id]?.ErrorBoundary ??
+	// 					imported.ErrorBoundary)
+	// 				: imported.ErrorBoundary,
+	// 			HydrateFallback: imported.HydrateFallback
+	// 				? (window.__reactRouterRouteModules[route.id]?.HydrateFallback ??
+	// 					imported.HydrateFallback)
+	// 				: imported.HydrateFallback,
+	// 		};
+	// 		window.__reactRouterRouteModules[route.id] = routeModule;
+	// 	}
 
-		let needsRevalidation = new Set(
-			Array.from(routeUpdates.values())
-				.filter(
-					(route) =>
-						route.hasLoader ||
-						route.hasClientLoader ||
-						route.hasClientMiddleware
-				)
-				.map((route) => route.id)
-		);
+	// 	let needsRevalidation = new Set(
+	// 		Array.from(routeUpdates.values())
+	// 			.filter(
+	// 				(route) =>
+	// 					route.hasLoader ||
+	// 					route.hasClientLoader ||
+	// 					route.hasClientMiddleware
+	// 			)
+	// 			.map((route) => route.id)
+	// 	);
 
-		let routes = __reactRouterDataRouter.createRoutesForHMR(
-			needsRevalidation,
-			manifest.routes,
-			window.__reactRouterRouteModules,
-			window.__reactRouterContext.ssr,
-			window.__reactRouterContext.isSpaMode
-		);
-		__reactRouterDataRouter._internalSetRoutes(routes);
-		routeUpdates.clear();
-		window.__reactRouterRouteModuleUpdates.clear();
-	}
+	// 	let routes = __reactRouterDataRouter.createRoutesForHMR(
+	// 		needsRevalidation,
+	// 		manifest.routes,
+	// 		window.__reactRouterRouteModules,
+	// 		window.__reactRouterContext.ssr,
+	// 		window.__reactRouterContext.isSpaMode
+	// 	);
+	// 	__reactRouterDataRouter._internalSetRoutes(routes);
+	// 	routeUpdates.clear();
+	// 	window.__reactRouterRouteModuleUpdates.clear();
+	// }
 
-	try {
-		window.__reactRouterHdrActive = true;
-		await __reactRouterDataRouter.revalidate();
-	} finally {
-		window.__reactRouterHdrActive = false;
-	}
+	// try {
+	// 	window.__reactRouterHdrActive = true;
+	// 	await __reactRouterDataRouter.revalidate();
+	// } finally {
+	// 	window.__reactRouterHdrActive = false;
+	// }
 
-	if (manifest) {
-		Object.assign(window.__reactRouterManifest, manifest);
-	}
+	// if (manifest) {
+	// 	Object.assign(window.__reactRouterManifest, manifest);
+	// }
 	exports.performReactRefresh();
 }, 16);
 
@@ -157,11 +157,12 @@ function __hmr_import(module) {
 const routeUpdates = new Map();
 window.__reactRouterRouteModuleUpdates = new Map();
 
-import.meta.hot.on("react-router:hmr", async ({ route }) => {
-	window.__reactRouterClearCriticalCss();
+import.meta.hot.on("repo-framework-lib:hmr", async (ctx) => {
+	console.info('[repo-framework-lib:hmr] Updating route', ctx);
+	// window.__reactRouterClearCriticalCss();
 
 	if (route) {
-		routeUpdates.set(route.id, route);
+		routeUpdates.set(ctx.route.id, ctx.route);
 	}
 });
 
