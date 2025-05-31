@@ -1,6 +1,6 @@
 import * as pathe from "pathe";
 import type { Plugin } from "vite";
-import { virtualClientEntry } from "./virtual-modules";
+import { virtualClientEntry, virtualServerEntryId } from "./virtual-modules";
 
 export function myFrameworkPlugin(): Plugin {
 	let root = process.cwd();
@@ -54,7 +54,7 @@ export function myFrameworkPlugin(): Plugin {
 				return pathe.join(root, "src", "entry-client.tsx");
 			}
 
-			if (id === "virtual:repo-framework-lib:entry-server") {
+			if (id === virtualServerEntryId) {
 				return pathe.join(root, "src", "entry-server.tsx");
 			}
 

@@ -2,7 +2,7 @@ function createVirtualId(name: string) {
 	return `virtual:repo-framework-lib/${name}`;
 }
 
-function createVirtualModule(name: string) {
+export function createVirtualModule(name: string) {
 	const id = createVirtualId(name);
 	return {
 		id,
@@ -22,3 +22,5 @@ export const virtualClientEntry: VirtualModule = {
 	resolvedId: "",
 	url: "/src/entry-client.tsx",
 };
+
+export const virtualServerEntryId = "virtual:repo-framework-lib:entry-server";
