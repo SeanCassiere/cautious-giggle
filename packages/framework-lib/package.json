@@ -24,17 +24,30 @@
 		"lint": "eslint \"**/*.ts\""
 	},
 	"dependencies": {
+		"@babel/core": "^7.27.3",
+		"@babel/generator": "^7.27.3",
+		"@babel/parser": "^7.27.3",
+		"@babel/plugin-syntax-decorators": "^7.27.1",
+		"@babel/plugin-syntax-jsx": "^7.27.1",
+		"@babel/preset-typescript": "^7.27.1",
+		"@babel/traverse": "^7.27.3",
+		"@babel/types": "^7.27.3",
 		"@photonjs/core": "0.0.1-commit-2aa7ff2",
 		"@types/node": "^22.15.21",
 		"@universal-middleware/core": "^0.4.7",
 		"@universal-middleware/sirv": "^0.1.20",
+		"defu": "^6.1.4",
 		"pathe": "^2.0.3",
 		"react": "^19.1.0",
-		"react-dom": "^19.1.0"
+		"react-dom": "^19.1.0",
+		"react-refresh": "^0.17.0"
 	},
 	"devDependencies": {
 		"@repo/eslint-config": "workspace:*",
 		"@repo/typescript-config": "workspace:*",
+		"@types/babel__core": "^7.20.5",
+		"@types/babel__generator": "^7.27.0",
+		"@types/babel__traverse": "^7.20.7",
 		"@types/react": "^19.0.1",
 		"@types/react-dom": "^19.0.2",
 		"eslint": "^8.57.0",
