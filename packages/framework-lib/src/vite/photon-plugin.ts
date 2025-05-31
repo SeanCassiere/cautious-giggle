@@ -7,6 +7,6 @@ export function photonPlugin(): Array<Plugin> {
 		resolveMiddlewares() {
 			return "@repo/framework-lib/universal-middleware";
 		},
-		hmr: "prefer-restart",
+		hmr: false,
 	});
 }

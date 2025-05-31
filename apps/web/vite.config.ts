@@ -4,9 +4,9 @@ import { defineConfig } from "vite";
 import { frameworkPlugin } from "@repo/framework-lib/vite";
 
 export default defineConfig({
-	photon: {
-		server: { id: "./server.ts", server: "hono" },
-	},
+	// photon: {
+	// 	server: { id: "./server.ts", server: "hono" },
+	// },
 	plugins: [
 		frameworkPlugin(),
 		// react()

@@ -1,9 +1,11 @@
 // Adapted from Remix's HMR setup: https://github.com/remix-run/react-router/blob/main/packages/react-router-dev/vite/plugin.ts
+// HMR resources from Dan Abramov: https://github.com/facebook/react/issues/16604#issuecomment-528663101
 import * as pathe from "pathe";
 import * as fsp from "node:fs/promises";
 import * as babel from "@babel/core";
 import * as vite from "vite";
 import {
+	createVirtualModule,
 	virtualClientEntry,
 	virtualHmrRuntime,
 	virtualInjectHmrRuntime,
@@ -12,6 +14,7 @@ import {
 import type { Plugin } from "vite";
 
 export function hmrPlugin(): Array<Plugin> {
+	let root = process.cwd();
 	let viteCommand: vite.ResolvedConfig["command"];
 
 	return [
@@ -38,6 +41,7 @@ export function hmrPlugin(): Array<Plugin> {
 				].join("\n");
 			},
 			configResolved(config) {
+				root = config.root;
 				viteCommand = config.command;
 			},
 		},
@@ -120,10 +124,40 @@ export function hmrPlugin(): Array<Plugin> {
 		{
 			name: "repo-framework-lib:hmr-updates",
 			async handleHotUpdate({ server, modules, file, read }) {
-				console.debug("handleHotUpdate() modules\n", modules);
-				console.debug("handleHotUpdate() file\n", file);
+				console.debug("handleHotUpdate() file\n---", JSON.stringify(file));
 
 				const hmrEvent = { route: null };
+
+				// modules.forEach((mod) => {
+				// 	// console.debug("-----");
+				// 	// console.debug("handleHotUpdate() mod\n", mod.id);
+				// 	if (mod.id) {
+				// 		const foundModule = server.moduleGraph.getModuleById(mod.id);
+				// 		// console.debug("handleHotUpdate() foundModule\n", foundModule);
+				// 		if (foundModule) {
+				// 			server.moduleGraph.invalidateModule(foundModule);
+				// 		}
+				// 	}
+				// 	// console.debug("-----");
+				// });
+				// [
+				// 	pathe.join(root, "src", "entry-server.tsx"),
+				// 	pathe.join(root, "src", "entry-client.tsx"),
+				// ].forEach((virtualId) => {
+				// 	const module = server.moduleGraph.getModuleById(virtualId);
+				// 	console.debug(
+				// 		"---\n",
+				// 		"handleHotUpdate() virtual module",
+				// 		virtualId,
+				// 		"\n",
+				// 		module
+				// 	);
+				// 	if (module) {
+				// 		server.moduleGraph.invalidateModule(module);
+				// 	}
+				// });
+
+				// invalidateVirtualModules(server);
 
 				server.hot.send({
 					type: "custom",
@@ -155,6 +189,22 @@ export function hmrPlugin(): Array<Plugin> {
 			},
 		},
 	];
+}
+
+const virtual = {
+	serverManifest: createVirtualModule("server-manifest"),
+	browserManifest: virtualClientEntry,
+};
+
+function invalidateVirtualModules(viteDevServer: vite.ViteDevServer) {
+	Object.values(virtual).forEach((virtualMod) => {
+		console.log("virtualMod", virtualMod);
+		const mod = viteDevServer.moduleGraph.getModuleById(virtualMod.resolvedId);
+		console.log("mod", mod);
+		if (mod) {
+			viteDevServer.moduleGraph.invalidateModule(mod);
+		}
+	});
 }
 
 function addRefreshWrapper(code: string, id: string): string {
