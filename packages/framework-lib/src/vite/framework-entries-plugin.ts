@@ -2,7 +2,7 @@ import * as pathe from "pathe";
 import type { Plugin } from "vite";
 import { virtualClientEntry, virtualServerEntryId } from "./virtual-modules";
 
-export function myFrameworkPlugin(): Plugin {
+export function frameworkEntriesPlugin(): Plugin {
 	let root = process.cwd();
 
 	return {

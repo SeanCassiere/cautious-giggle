@@ -15,7 +15,6 @@ type VirtualModule = ReturnType<typeof createVirtualModule>;
 
 // prettier-ignore
 export const virtualInjectHmrRuntime = createVirtualModule("inject-hmr-runtime");
-export const virtualHmrRuntime = createVirtualModule("hmr-runtime");
 
 export const virtualClientEntry: VirtualModule = {
 	id: createVirtualId("entry-client"),

@@ -5,8 +5,6 @@ import { virtualInjectHmrRuntime } from "../../vite/virtual-modules";
 
 export const ssrMiddleware = enhance(
 	async (request: Request) => {
-		console.info("[lib] SSR Middleware invoked for request:", request.url);
-
 		const url = new URL(request.url);
 		const pathname = url.href.replace(url.origin, "");
 
@@ -36,7 +34,7 @@ export const ssrMiddleware = enhance(
 	},
 	// enhance() adds meta data (a Universal Middleware in itself is just a Request => Response function)
 	{
-		name: "awesome-framework:ssr",
+		name: "repo-framework-lib:ssr",
 		path: "/**",
 		method: "GET",
 	}

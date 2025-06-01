@@ -11,7 +11,7 @@ export const apiMiddleware = enhance(
 	},
 	// enhance() adds meta data (a Universal Middleware in itself is just a Request => Response function)
 	{
-		name: "awesome-framework:api-route",
+		name: "repo-framework-lib:api-route",
 		path: "/api",
 		method: "GET",
 	}
