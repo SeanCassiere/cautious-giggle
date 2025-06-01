@@ -1,9 +1,10 @@
 import type { Plugin } from "vite";
-import { myFrameworkPlugin } from "./framework-lib-plugin";
+import { frameworkEntriesPlugin } from "./framework-entries-plugin";
 import { photonPlugin } from "./photon-plugin";
+import { frameworkHmrPlugin } from "./framework-hmr-plugin";
 
 function frameworkPlugin(): Array<Plugin> {
-	return [myFrameworkPlugin(), ...photonPlugin()];
+	return [frameworkHmrPlugin(), frameworkEntriesPlugin(), ...photonPlugin()];
 }
 
 export { frameworkPlugin };

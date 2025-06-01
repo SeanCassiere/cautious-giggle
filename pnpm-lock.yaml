@@ -93,6 +93,9 @@ importers:
       '@universal-middleware/sirv':
         specifier: ^0.1.20
         version: 0.1.20
+      defu:
+        specifier: ^6.1.4
+        version: 6.1.4
       pathe:
         specifier: ^2.0.3
         version: 2.0.3
@@ -1558,7 +1561,6 @@ packages:
 
   /defu@6.1.4:
     resolution: {integrity: sha512-mEQCMmwJu317oSz8CwdIOdwf3xMif1ttiM8LTufzc3g6kR+9Pe236twL8j3IYT1F7GfRgGcW6MWxzZjLIkuHIg==}
-    dev: true
 
   /depd@2.0.0:
     resolution: {integrity: sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==}

@@ -1,14 +1,12 @@
 import * as pathe from "pathe";
 import type { Plugin } from "vite";
+import { virtualClientEntry, virtualServerEntryId } from "./virtual-modules";
 
-const virtualClientEntry = "virtual:framework-lib:entry-client";
-const virtualServerEntry = "virtual:framework-lib:entry-server";
-
-export function myFrameworkPlugin(): Plugin {
+export function frameworkEntriesPlugin(): Plugin {
 	let root = process.cwd();
 
 	return {
-		name: "repo-framework-lib",
+		name: "repo-framework-lib:my-framework",
 		sharedDuringBuild: true,
 		config() {
 			return {
@@ -30,7 +28,7 @@ export function myFrameworkPlugin(): Plugin {
 					build: {
 						rollupOptions: {
 							input: {
-								index: virtualClientEntry,
+								index: virtualClientEntry.id,
 							},
 						},
 						outDir: "./dist/client",
@@ -52,11 +50,11 @@ export function myFrameworkPlugin(): Plugin {
 			return undefined;
 		},
 		resolveId(id) {
-			if (id === virtualClientEntry) {
+			if (id === virtualClientEntry.id) {
 				return pathe.join(root, "src", "entry-client.tsx");
 			}
 
-			if (id === virtualServerEntry) {
+			if (id === virtualServerEntryId) {
 				return pathe.join(root, "src", "entry-server.tsx");
 			}
 

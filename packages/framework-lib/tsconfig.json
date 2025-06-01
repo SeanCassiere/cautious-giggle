@@ -4,7 +4,8 @@
 		"lib": ["DOM", "DOM.Iterable", "ESNext"],
 		"skipLibCheck": true,
 		"isolatedModules": true,
-		"declaration": true
+		"declaration": true,
+		"target": "ESNext"
 	},
 	"include": ["."],
 	"exclude": ["node_modules"]
