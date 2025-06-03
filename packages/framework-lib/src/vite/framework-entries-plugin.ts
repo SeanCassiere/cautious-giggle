@@ -32,8 +32,6 @@ export function frameworkEntriesPlugin(): Plugin {
 							},
 						},
 						outDir: "./dist/client",
-						manifest: true,
-						ssrManifest: true,
 					},
 				};
 			}
